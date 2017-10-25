@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Speech.Synthesis;
 
 
 namespace Grades
@@ -12,8 +11,7 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-            SpeechSynthesizer synth = new SpeechSynthesizer();
-            synth.Speak("Hello! this is the grade book program. Created by Maciej Wolejszo");
+            
             GradeBook book = new GradeBook();
             book.AddGrade(91);
             book.AddGrade(89.5f);
