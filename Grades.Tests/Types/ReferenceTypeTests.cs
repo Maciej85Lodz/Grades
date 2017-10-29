@@ -11,10 +11,19 @@ namespace Grades.Tests.Types
     public class ReferenceTypeTests
     {
         [TestMethod]
+        public void StringComparisons()
+        {
+            string name1 = "Maciej";
+            string name2 = "maciej";
+
+            bool result = String.Equals(name1, name2, StringComparison.InvariantCultureIgnoreCase);
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
         public void IntVariablesHoldValue()
         {
             int x1 = 100;
-            int x2 = x1;
+            Int32 x2 = x1;
             x1 = 4;
             Assert.AreNotEqual(x1, x2);
         }
