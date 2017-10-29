@@ -32,7 +32,7 @@ namespace Grades.Tests
             book.AddGrade(45);
 
             GradeStatistics result = book.ComputeStatistic();
-            Assert.AreEqual(67f, result.AverageGrade,0.01);
+            Assert.AreNotEqual(67f, result.AverageGrade,0.01);
         }
     }
 }

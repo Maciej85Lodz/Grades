@@ -8,8 +8,38 @@ using System.Threading.Tasks;
 namespace Grades.Tests.Types
 {
     [TestClass]
-    public class ReferenceTypeTests
+    public class TypeTests
     {
+
+        [TestMethod]
+        public void ValueTypesPassByValue()
+        {
+            int x = 46;
+            IncrementNumber(x);
+
+            Assert.AreEqual(46, x);
+        }
+
+        public void IncrementNumber(int number)
+        {
+            number += 1;
+            number = 0;
+        }
+        [TestMethod]
+        public void ReferenceTypesPassByValue()
+        {
+            GradeBook book1 = new GradeBook();
+            GradeBook book2 = book1;
+            GiveBookAName(book2);
+            Assert.AreEqual("A GradeBook", book1.Name);
+        }
+
+        private void GiveBookAName(GradeBook book)
+        {
+            book = new GradeBook();
+            book.Name = "A GradeBook";
+        }
+
         [TestMethod]
         public void StringComparisons()
         {
@@ -37,7 +67,7 @@ namespace Grades.Tests.Types
 
             g1 = new GradeBook();
             g1.Name = "Maciej's Grade book";
-            Assert.AreEqual(g1.Name, g2.Name);
+            Assert.AreNotEqual(g1.Name, g2.Name);
         }
     }
 }
