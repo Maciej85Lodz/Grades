@@ -4,50 +4,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Grades
 {
-    class Program
+    public class GradeStatistics
     {
-        static void Main(string[] args)
-        { 
-            
-            GradeBook book = new GradeBook();
-            book.NameChanged += OnNameChanged;
-         
-            
-
-            book.Name = "Maciej's Grade Book";
-            book.Name = "Grade book";
-            book.AddGrade(91);
-            book.AddGrade(89.5f);
-            book.AddGrade(75);
-
-            GradeStatistics stats = book.ComputeStatistic();
-            Console.WriteLine(book.Name);
-            WriteResult("Average", stats.AverageGrade);
-            WriteResult("Highest", (int)stats.HighestGrade);
-            WriteResult("Lowest", stats.LowestGrade);
-            Console.ReadLine();
-
-        }
-        static void OnNameChanged(object sender, NameChangedEventArgs args)
+        public GradeStatistics()
         {
-            Console.WriteLine($"Grade book changing name from {args.ExisitngName} to {args.NewName}");
+            HighestGrade = 0;
+            LowestGrade = float.MaxValue;
         }
 
-        
-
-        static void WriteResult(string description, int result)
+        public string Description
         {
-            Console.WriteLine(description + ": " + result);
+            get
+            {
+                string result;
+                switch (LetterGrade)
+                {
+                    case "A":
+                        result = "Excellent";
+                        break;
+                    case "B":
+                        result = "Good";
+                        break;
+                    case "C":
+                        result = "Average";
+                        break;
+                    case "D":
+                        result = "Below average";
+                        break;
+                    default:
+                        result = "Failing";
+                        break;
+                }
+                return result;
+            }
         }
 
-        static void WriteResult(string description, float result)
+        public string LetterGrade
         {
-            Console.WriteLine($"{description}: {result:F2}", description,result);
+            get
+            {
+                string result;
+                if (AverageGrade >= 90)
+                {
+                    result = "A";
+                }
+                else if (AverageGrade >= 80)
+                {
+                    result = "B";
+                }
+                else if (AverageGrade >= 70)
+                {
+                    result = "C";
+                }
+                else if (AverageGrade >= 60)
+                {
+                    result = "D";
+                }
+                else
+                {
+                    result = "F";
+                }
+                return result;
+            }
         }
 
-        
+        public float AverageGrade;
+        public float HighestGrade;
+        public float LowestGrade;
     }
 }

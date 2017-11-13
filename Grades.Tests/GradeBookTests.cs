@@ -6,7 +6,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Grades.Tests
 {
     [TestClass]
@@ -17,22 +16,33 @@ namespace Grades.Tests
         {
             GradeBook book = new GradeBook();
             book.AddGrade(10);
-            book.AddGrade(20);
-            book.AddGrade(67);
+            book.AddGrade(90);
 
-            GradeStatistics result = book.ComputeStatistic();
-            Assert.AreEqual(67, result.HighestGrade);
+            GradeStatistics result = book.ComputeStatistics();
+            Assert.AreEqual(90, result.HighestGrade);
         }
+
         [TestMethod]
         public void ComputesLowestGrade()
         {
             GradeBook book = new GradeBook();
+            book.AddGrade(10);
+            book.AddGrade(90);
+
+            GradeStatistics result = book.ComputeStatistics();
+            Assert.AreEqual(10, result.LowestGrade);
+        }
+
+        [TestMethod]
+        public void ComputesAverageGrade()
+        {
+            GradeBook book = new GradeBook();
             book.AddGrade(91);
             book.AddGrade(89.5f);
-            book.AddGrade(45);
+            book.AddGrade(75);
 
-            GradeStatistics result = book.ComputeStatistic();
-            Assert.AreNotEqual(67f, result.AverageGrade,0.01);
+            GradeStatistics result = book.ComputeStatistics();
+            Assert.AreEqual(85.16, result.AverageGrade, 0.01);
         }
     }
 }

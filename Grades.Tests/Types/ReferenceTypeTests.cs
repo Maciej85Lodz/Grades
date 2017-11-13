@@ -10,7 +10,6 @@ namespace Grades.Tests.Types
     [TestClass]
     public class TypeTests
     {
-
         [TestMethod]
         public void UsingArrays()
         {
@@ -30,10 +29,10 @@ namespace Grades.Tests.Types
         [TestMethod]
         public void UppercaseString()
         {
-            string name = "Maciej Wołejszo";
+            string name = "scott";
             name = name.ToUpper();
 
-            Assert.AreEqual("MACIEJ WOŁEJSZO", name);
+            Assert.AreEqual("SCOTT", name);
         }
 
         [TestMethod]
@@ -53,17 +52,18 @@ namespace Grades.Tests.Types
             Assert.AreEqual(47, x);
         }
 
-        public void IncrementNumber(ref int number)
+        private void IncrementNumber(ref int number)
         {
             number += 1;
         }
+
 
         [TestMethod]
         public void ReferenceTypesPassByValue()
         {
             GradeBook book1 = new GradeBook();
             GradeBook book2 = book1;
-             
+
             GiveBookAName(ref book2);
             Assert.AreEqual("A GradeBook", book2.Name);
         }
@@ -74,20 +74,24 @@ namespace Grades.Tests.Types
             book.Name = "A GradeBook";
         }
 
+
         [TestMethod]
         public void StringComparisons()
         {
-            string name1 = "Maciej";
-            string name2 = "maciej";
+            string name1 = "Scott";
+            string name2 = "scott";
 
             bool result = String.Equals(name1, name2, StringComparison.InvariantCultureIgnoreCase);
             Assert.IsTrue(result);
         }
+
+
         [TestMethod]
-        public void IntVariablesHoldValue()
+        public void IntVariablesHoldAValue()
         {
             int x1 = 100;
             Int32 x2 = x1;
+
             x1 = 4;
             Assert.AreNotEqual(x1, x2);
         }
@@ -99,9 +103,8 @@ namespace Grades.Tests.Types
             GradeBook g1 = new GradeBook();
             GradeBook g2 = g1;
 
-            g1 = new GradeBook();
-            g1.Name = "Maciej's Grade book";
-            Assert.AreNotEqual(g1.Name, g2.Name);
+            g1.Name = "Scott's grade book";
+            Assert.AreEqual(g1.Name, g2.Name);
         }
     }
 }
