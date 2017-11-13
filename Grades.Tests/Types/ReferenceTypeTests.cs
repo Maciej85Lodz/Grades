@@ -12,29 +12,47 @@ namespace Grades.Tests.Types
     {
 
         [TestMethod]
+        public void UppercaseString()
+        {
+            string name = "Maciej Wołejszo";
+            name = name.ToUpper();
+
+            Assert.AreEqual("MACIEJ WOŁEJSZO", name);
+        }
+
+        [TestMethod]
+        public void AddDaysToDateTime()
+        {
+            DateTime date = new DateTime(2015, 1, 1);
+            date = date.AddDays(1);
+
+            Assert.AreEqual(2, date.Day);
+        }
+
+        [TestMethod]
         public void ValueTypesPassByValue()
         {
             int x = 46;
-            IncrementNumber(x);
-
-            Assert.AreEqual(46, x);
+            IncrementNumber(ref x);
+            Assert.AreEqual(47, x);
         }
 
-        public void IncrementNumber(int number)
+        public void IncrementNumber(ref int number)
         {
             number += 1;
-            number = 0;
         }
+
         [TestMethod]
         public void ReferenceTypesPassByValue()
         {
             GradeBook book1 = new GradeBook();
             GradeBook book2 = book1;
-            GiveBookAName(book2);
-            Assert.AreEqual("A GradeBook", book1.Name);
+             
+            GiveBookAName(ref book2);
+            Assert.AreEqual("A GradeBook", book2.Name);
         }
 
-        private void GiveBookAName(GradeBook book)
+        private void GiveBookAName(ref GradeBook book)
         {
             book = new GradeBook();
             book.Name = "A GradeBook";
