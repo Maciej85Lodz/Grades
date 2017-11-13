@@ -29,10 +29,10 @@ namespace Grades.Tests.Types
         [TestMethod]
         public void UppercaseString()
         {
-            string name = "scott";
+            string name = "maciej";
             name = name.ToUpper();
 
-            Assert.AreEqual("SCOTT", name);
+            Assert.AreEqual("MACIEJ", name);
         }
 
         [TestMethod]
@@ -78,8 +78,8 @@ namespace Grades.Tests.Types
         [TestMethod]
         public void StringComparisons()
         {
-            string name1 = "Scott";
-            string name2 = "scott";
+            string name1 = "Maciej";
+            string name2 = "maciej";
 
             bool result = String.Equals(name1, name2, StringComparison.InvariantCultureIgnoreCase);
             Assert.IsTrue(result);
