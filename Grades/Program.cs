@@ -1,77 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Grades
 {
-    public class GradeStatistics
+    class Program
     {
-        public GradeStatistics()
+        static void Main(string[] args)
         {
-            HighestGrade = 0;
-            LowestGrade = float.MaxValue;
+            GradeBook book = new GradeBook();
+
+            GetBookName(book);
+            AddGrades(book);
+            SaveGrades(book);
+            WriteResults(book);
         }
 
-        public string Description
+        private static void WriteResults(GradeBook book)
         {
-            get
+            GradeStatistics stats = book.ComputeStatistics();
+            WriteResult("Average", stats.AverageGrade);
+            WriteResult("Highest", stats.HighestGrade);
+            WriteResult("Lowest", stats.LowestGrade);
+            WriteResult(stats.Description, stats.LetterGrade);
+        }
+
+        private static void SaveGrades(GradeBook book)
+        {
+            using (StreamWriter outputFile = File.CreateText("grades.txt"))
             {
-                string result;
-                switch (LetterGrade)
-                {
-                    case "A":
-                        result = "Excellent";
-                        break;
-                    case "B":
-                        result = "Good";
-                        break;
-                    case "C":
-                        result = "Average";
-                        break;
-                    case "D":
-                        result = "Below average";
-                        break;
-                    default:
-                        result = "Failing";
-                        break;
-                }
-                return result;
+                book.WriteGrades(outputFile);
             }
         }
 
-        public string LetterGrade
+        private static void AddGrades(GradeBook book)
         {
-            get
+            book.AddGrade(91);
+            book.AddGrade(89.5f);
+            book.AddGrade(75);
+        }
+
+        private static void GetBookName(GradeBook book)
+        {
+            try
             {
-                string result;
-                if (AverageGrade >= 90)
-                {
-                    result = "A";
-                }
-                else if (AverageGrade >= 80)
-                {
-                    result = "B";
-                }
-                else if (AverageGrade >= 70)
-                {
-                    result = "C";
-                }
-                else if (AverageGrade >= 60)
-                {
-                    result = "D";
-                }
-                else
-                {
-                    result = "F";
-                }
-                return result;
+                Console.WriteLine("Enter a name");
+                book.Name = Console.ReadLine();
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
 
-        public float AverageGrade;
-        public float HighestGrade;
-        public float LowestGrade;
+        static void WriteResult(string description, string result)
+        {
+            Console.WriteLine($"{description}: {result}", description, result);
+        }
+
+        static void WriteResult(string description, float result)
+        {
+            Console.WriteLine($"{description}: {result:F2}", description, result);
+        }
     }
 }
