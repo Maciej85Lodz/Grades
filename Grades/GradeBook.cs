@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Grades
 {
-    public class GradeBook
+    public class GradeBook: object
     {
         public GradeBook()
         {
@@ -12,9 +12,9 @@ namespace Grades
             grades = new List<float>();
         }
 
-        public GradeStatistics ComputeStatistics()
+        public virtual GradeStatistics ComputeStatistics()
         {
-            Console.WriteLine("ThrowAwayGradeBook::ComputeStatistics");
+            Console.WriteLine("GradeBook::ComputeStatistics");
 
             GradeStatistics stats = new GradeStatistics();
 
