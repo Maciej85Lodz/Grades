@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 
 namespace Grades
 {
-    public class GradeBook: GradeTracker
+    public class GradeBook : GradeTracker
     {
         public GradeBook()
         {
@@ -42,6 +43,10 @@ namespace Grades
             grades.Add(grade);
         }
 
+        public override IEnumerator GetEnumerator()
+        {
+            return grades.GetEnumerator();
+        }
 
         protected List<float> grades;
     }

@@ -11,15 +11,15 @@ namespace Grades
     {
         static void Main(string[] args)
         {
-            IGradeTracker book = CreateNewGradeBook();
+            IGradeTracker book = CreateGradeBook();
 
-            // GetBookName(book);
+            //GetBookName(book);
             AddGrades(book);
             SaveGrades(book);
             WriteResults(book);
         }
 
-        private static IGradeTracker CreateNewGradeBook()
+        private static IGradeTracker CreateGradeBook()
         {
             return new ThrowAwayGradeBook();
         }
@@ -27,6 +27,12 @@ namespace Grades
         private static void WriteResults(IGradeTracker book)
         {
             GradeStatistics stats = book.ComputeStatistics();
+
+            foreach (float grade in book)
+            {
+                Console.WriteLine(grade);
+            }
+
             WriteResult("Average", stats.AverageGrade);
             WriteResult("Highest", stats.HighestGrade);
             WriteResult("Lowest", stats.LowestGrade);
@@ -68,7 +74,7 @@ namespace Grades
 
         static void WriteResult(string description, float result)
         {
-            Console.ReadLine();
+            Console.WriteLine($"{description}: {result:F2}", description, result);
         }
     }
 }
